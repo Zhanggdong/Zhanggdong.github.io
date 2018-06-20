@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Gre的博客">
 <meta property="og:description" content="一、源码主要模块我下载的Elasticsearch的源码版本为5.6.4  从上图来看：Elasticsearch主要包含以下几个模块 distribution：elasticsearch的打包发行相关，将elasticsearch打成各种发行包（zip，deb，rpm，tar）的模块。具体用法如是，在相应的发行版本模块下执行publishToMavenLocal这个Task，如果执行成功的话就会">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/05/26/img/es/ES架构图">
+<meta property="og:image" content="http://yoursite.com/2018/05/26/images/es/es整体结构.png">
 <meta property="og:image" content="g:/我的资料/ELK日志监控/es源码分析/distribution整体架构.png">
 <meta property="og:image" content="g:/我的资料/ELK日志监控/es源码分析/distribution整体架构-打包zip.png">
 <meta property="og:image" content="g:/我的资料/ELK日志监控/es源码分析/distribution整体架构-打包zip成功.png">
@@ -24,11 +24,11 @@
 <meta property="og:image" content="g:/我的资料/ELK日志监控/es源码分析/modules整体架构.png">
 <meta property="og:image" content="g:/我的资料/ELK日志监控/es源码分析/plugings整体架构.png">
 <meta property="og:image" content="g:/我的资料/ELK日志监控/es源码分析/ES架构图.png">
-<meta property="og:updated_time" content="2018-06-20T00:41:13.737Z">
+<meta property="og:updated_time" content="2018-06-20T00:43:55.885Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="elasticsearch源码分析(一)--整体架构">
 <meta name="twitter:description" content="一、源码主要模块我下载的Elasticsearch的源码版本为5.6.4  从上图来看：Elasticsearch主要包含以下几个模块 distribution：elasticsearch的打包发行相关，将elasticsearch打成各种发行包（zip，deb，rpm，tar）的模块。具体用法如是，在相应的发行版本模块下执行publishToMavenLocal这个Task，如果执行成功的话就会">
-<meta name="twitter:image" content="http://yoursite.com/2018/05/26/img/es/ES架构图">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/26/images/es/es整体结构.png">
   
     <link rel="alternative" href="/atom.xml" title="Gre的博客" type="application/atom+xml">
   
@@ -195,7 +195,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="一、源码主要模块"><a href="#一、源码主要模块" class="headerlink" title="一、源码主要模块"></a>一、源码主要模块</h1><p>我下载的Elasticsearch的源码版本为5.6.4</p>
-<p><img src="../img/es/ES架构图" alt="ES架构图"></p>
+<p><img src="../images/es/es整体结构.png" alt=""></p>
 <p>从上图来看：Elasticsearch主要包含以下几个模块</p>
 <p>distribution：elasticsearch的打包发行相关，将elasticsearch打成各种发行包（zip，deb，rpm，tar）的模块。具体用法如是，在相应的发行版本模块下执行publishToMavenLocal这个Task，如果执行成功的话就会在路径build/distributions下生成对应的发行包，这种打好的包就能在生产服务器上运行。如果自己修改了源码，打包时就需要用到该模块了。</p>
 <p><img src="G:\我的资料\ELK日志监控\es源码分析\distribution整体架构.png" alt=":\我的资料\ELK日志监控\es源码分析\distribution整体架构.pn"></p>
@@ -322,11 +322,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/06/19/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/05/26/elasticsearch源码分析(二)--启动/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Hello World
+          elasticsearch源码分析(一)--启动
         
       </div>
     </a>
