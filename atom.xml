@@ -38,30 +38,6 @@
   </entry>
   
   <entry>
-    <title>elasticsearch源码分析(一)--整体架构</title>
-    <link href="http://yoursite.com/2018/05/26/elasticsearch%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90(%E4%B8%80)--%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/"/>
-    <id>http://yoursite.com/2018/05/26/elasticsearch源码分析(一)--整体架构/</id>
-    <published>2018-05-26T04:12:57.000Z</published>
-    <updated>2018-06-20T00:58:43.329Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="一、源码主要模块"><a href="#一、源码主要模块" class="headerlink" title="一、源码主要模块"></a>一、源码主要模块</h1><p>我下载的Elasticsearch的源码版本为5.6.4</p><p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/es01.png" alt="es整体结构"></p><p>从上图来看：Elasticsearch主要包含以下几个模块</p><p>distribution：elasticsearch的打包发行相关，将elasticsearch打成各种发行包（zip，deb，rpm，tar）的模块。具体用法如是，在相应的发行版本模块下执行publishToMavenLocal这个Task，如果执行成功的话就会在路径build/distributions下生成对应的发行包，这种打好的包就能在生产服务器上运行。如果自己修改了源码，打包时就需要用到该模块了。</p><p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/es02-2.png" alt=":\我的资料\ELK日志监控\es源码分析\distribution整体架构.pn"></p><p><img src="G:\我的资料\ELK日志监控\es源码分析\distribution整体架构-打包zip.png" alt=":\我的资料\ELK日志监控\es源码分析\distribution整体架构-打包zip.pn"></p><p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/es02-3.png" alt=":\我的资料\ELK日志监控\es源码分析\distribution整体架构-打包zip成功.pn"></p><p>core：核心包，elasticsearch的源码主要在这个里面，Elasticsearch索引管理、集群管理、服务发现、查询、对Lucene操作的封装等都位于该模块</p><p>buildSrc：elasticsearch的构建相关的代码，gradle相关依赖配置都在改模块下</p><p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/buildSrc%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png" alt=":\我的资料\ELK日志监控\es源码分析\buildSrc整体架构.pn"></p><p>client：作为连接elasticsearch的客户端相关代码，它提供了Rest方式（基于Http）、transport （Java Netty内部的通信方式）等方式。</p><p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/client%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png" alt=":\我的资料\ELK日志监控\es源码分析\client整体架构.pn"></p><p>modules：作为elasticsearch除核心外的必备模块相关代码,比如对Netty的封装、父子类查询、重建索引</p><p><img src="G:\我的资料\ELK日志监控\es源码分析\modules整体架构.png" alt=":\我的资料\ELK日志监控\es源码分析\modules整体架构.pn"></p><p>plugins：作为elasticsearch必备的插件的相关代码，丰富ES的相关功能，比如IK分词器插件、mapper-attachments/ingest-attachment文件处理插件。</p><p><img src="G:\我的资料\ELK日志监控\es源码分析\plugings整体架构.png" alt=":\我的资料\ELK日志监控\es源码分析\plugings整体架构.pn"></p><h1 id="二、Elasticsearch整体架构图"><a href="#二、Elasticsearch整体架构图" class="headerlink" title="二、Elasticsearch整体架构图"></a>二、Elasticsearch整体架构图</h1><p><img src="G:\我的资料\ELK日志监控\es源码分析\ES架构图.png" alt=":\我的资料\ELK日志监控\es源码分析\ES架构图.pn"></p><p>服务发现以及选主 ZenDiscovery</p><p>恢复以及容灾</p><p>搜索引擎 Search</p><p>ClusterState</p><p>网络层</p><p>Rest 和 RPC</p><p>线程池</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;一、源码主要模块&quot;&gt;&lt;a href=&quot;#一、源码主要模块&quot; class=&quot;headerlink&quot; title=&quot;一、源码主要模块&quot;&gt;&lt;/a&gt;一、源码主要模块&lt;/h1&gt;&lt;p&gt;我下载的Elasticsearch的源码版本为5.6.4&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;
-      
-    
-    </summary>
-    
-      <category term="Elasticsearch源码分析专题" scheme="http://yoursite.com/categories/Elasticsearch%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%93%E9%A2%98/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>elasticsearch源码分析(一)--启动</title>
     <link href="http://yoursite.com/2018/05/26/elasticsearch%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90(%E4%BA%8C)--%E5%90%AF%E5%8A%A8/"/>
     <id>http://yoursite.com/2018/05/26/elasticsearch源码分析(二)--启动/</id>
@@ -77,6 +53,30 @@
         &lt;p&gt;由于最近半年来一直在使用Elasticsearch来做全文检索和ELK统一日志工作，对于ES还是觉得需要细细研究，才能感受到它的魅力，才能有所提高。&lt;/p&gt;
 &lt;p&gt;参考博客：&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.jianshu.com/p/41cd415
+      
+    
+    </summary>
+    
+      <category term="Elasticsearch源码分析专题" scheme="http://yoursite.com/categories/Elasticsearch%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E4%B8%93%E9%A2%98/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>elasticsearch源码分析(一)--整体架构</title>
+    <link href="http://yoursite.com/2018/05/26/elasticsearch%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90(%E4%B8%80)--%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/"/>
+    <id>http://yoursite.com/2018/05/26/elasticsearch源码分析(一)--整体架构/</id>
+    <published>2018-05-26T04:12:57.000Z</published>
+    <updated>2018-06-20T01:01:25.040Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一、源码主要模块"><a href="#一、源码主要模块" class="headerlink" title="一、源码主要模块"></a>一、源码主要模块</h1><p>我下载的Elasticsearch的源码版本为5.6.4</p><p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/es01.png" alt="es整体结构"></p><p>从上图来看：Elasticsearch主要包含以下几个模块</p><p>distribution：elasticsearch的打包发行相关，将elasticsearch打成各种发行包（zip，deb，rpm，tar）的模块。具体用法如是，在相应的发行版本模块下执行publishToMavenLocal这个Task，如果执行成功的话就会在路径build/distributions下生成对应的发行包，这种打好的包就能在生产服务器上运行。如果自己修改了源码，打包时就需要用到该模块了。</p><p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/es02-2.png" alt=":\我的资料\ELK日志监控\es源码分析\distribution整体架构.pn"></p><p><img src="G:\我的资料\ELK日志监控\es源码分析\distribution整体架构-打包zip.png" alt=":\我的资料\ELK日志监控\es源码分析\distribution整体架构-打包zip.pn"></p><p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/es02-3.png" alt=":\我的资料\ELK日志监控\es源码分析\distribution整体架构-打包zip成功.pn"></p><p>core：核心包，elasticsearch的源码主要在这个里面，Elasticsearch索引管理、集群管理、服务发现、查询、对Lucene操作的封装等都位于该模块</p><p>buildSrc：elasticsearch的构建相关的代码，gradle相关依赖配置都在改模块下</p><p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/buildSrc%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png" alt=":\我的资料\ELK日志监控\es源码分析\buildSrc整体架构.pn"></p><p>client：作为连接elasticsearch的客户端相关代码，它提供了Rest方式（基于Http）、transport （Java Netty内部的通信方式）等方式。</p><p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/client%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png" alt=":\我的资料\ELK日志监控\es源码分析\client整体架构.pn"></p><p>modules：作为elasticsearch除核心外的必备模块相关代码,比如对Netty的封装、父子类查询、重建索引</p><p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/modules%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png" alt=":\我的资料\ELK日志监控\es源码分析\modules整体架构.pn"></p><p>plugins：作为elasticsearch必备的插件的相关代码，丰富ES的相关功能，比如IK分词器插件、mapper-attachments/ingest-attachment文件处理插件。</p><p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/plugings%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png" alt=":\我的资料\ELK日志监控\es源码分析\plugings整体架构.pn"></p><h1 id="二、Elasticsearch整体架构图"><a href="#二、Elasticsearch整体架构图" class="headerlink" title="二、Elasticsearch整体架构图"></a>二、Elasticsearch整体架构图</h1><p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/ES%E6%9E%B6%E6%9E%84%E5%9B%BE.png" alt=":\我的资料\ELK日志监控\es源码分析\ES架构图.pn"></p><p>服务发现以及选主 ZenDiscovery</p><p>恢复以及容灾</p><p>搜索引擎 Search</p><p>ClusterState</p><p>网络层</p><p>Rest 和 RPC</p><p>线程池</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;一、源码主要模块&quot;&gt;&lt;a href=&quot;#一、源码主要模块&quot; class=&quot;headerlink&quot; title=&quot;一、源码主要模块&quot;&gt;&lt;/a&gt;一、源码主要模块&lt;/h1&gt;&lt;p&gt;我下载的Elasticsearch的源码版本为5.6.4&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;
       
     
     </summary>
