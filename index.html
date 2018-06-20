@@ -336,7 +336,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="一、源码主要模块"><a href="#一、源码主要模块" class="headerlink" title="一、源码主要模块"></a>一、源码主要模块</h1><p>我下载的Elasticsearch的源码版本为5.6.4</p>
-<p><img src="G:\我的资料\ELK日志监控\es源码分析\es整体结构.png" alt=":\我的资料\ELK日志监控\es源码分析\es整体结构.pn"></p>
+<p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/blob/master/img/es/RVPmnrbmnoTlm74=.png" alt="ES架构图"></p>
 <p>从上图来看：Elasticsearch主要包含以下几个模块</p>
 <p>distribution：elasticsearch的打包发行相关，将elasticsearch打成各种发行包（zip，deb，rpm，tar）的模块。具体用法如是，在相应的发行版本模块下执行publishToMavenLocal这个Task，如果执行成功的话就会在路径build/distributions下生成对应的发行包，这种打好的包就能在生产服务器上运行。如果自己修改了源码，打包时就需要用到该模块了。</p>
 <p><img src="G:\我的资料\ELK日志监控\es源码分析\distribution整体架构.png" alt=":\我的资料\ELK日志监控\es源码分析\distribution整体架构.pn"></p>
