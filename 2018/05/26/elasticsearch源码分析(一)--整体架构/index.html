@@ -15,20 +15,20 @@
 <meta property="og:site_name" content="Gre的博客">
 <meta property="og:description" content="一、源码主要模块我下载的Elasticsearch的源码版本为5.6.4  从上图来看：Elasticsearch主要包含以下几个模块 distribution：elasticsearch的打包发行相关，将elasticsearch打成各种发行包（zip，deb，rpm，tar）的模块。具体用法如是，在相应的发行版本模块下执行publishToMavenLocal这个Task，如果执行成功的话就会">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/05/26/images/es/es整体结构.png">
-<meta property="og:image" content="g:/我的资料/ELK日志监控/es源码分析/distribution整体架构.png">
+<meta property="og:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/es01.png">
+<meta property="og:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/es02-2.png">
 <meta property="og:image" content="g:/我的资料/ELK日志监控/es源码分析/distribution整体架构-打包zip.png">
-<meta property="og:image" content="g:/我的资料/ELK日志监控/es源码分析/distribution整体架构-打包zip成功.png">
-<meta property="og:image" content="g:/我的资料/ELK日志监控/es源码分析/buildSrc整体架构.png">
-<meta property="og:image" content="g:/我的资料/ELK日志监控/es源码分析/client整体架构.png">
+<meta property="og:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/es02-3.png">
+<meta property="og:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/buildSrc%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png">
+<meta property="og:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/client%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png">
 <meta property="og:image" content="g:/我的资料/ELK日志监控/es源码分析/modules整体架构.png">
 <meta property="og:image" content="g:/我的资料/ELK日志监控/es源码分析/plugings整体架构.png">
 <meta property="og:image" content="g:/我的资料/ELK日志监控/es源码分析/ES架构图.png">
-<meta property="og:updated_time" content="2018-06-20T00:44:51.029Z">
+<meta property="og:updated_time" content="2018-06-20T00:58:43.329Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="elasticsearch源码分析(一)--整体架构">
 <meta name="twitter:description" content="一、源码主要模块我下载的Elasticsearch的源码版本为5.6.4  从上图来看：Elasticsearch主要包含以下几个模块 distribution：elasticsearch的打包发行相关，将elasticsearch打成各种发行包（zip，deb，rpm，tar）的模块。具体用法如是，在相应的发行版本模块下执行publishToMavenLocal这个Task，如果执行成功的话就会">
-<meta name="twitter:image" content="http://yoursite.com/2018/05/26/images/es/es整体结构.png">
+<meta name="twitter:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/es01.png">
   
     <link rel="alternative" href="/atom.xml" title="Gre的博客" type="application/atom+xml">
   
@@ -195,17 +195,17 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="一、源码主要模块"><a href="#一、源码主要模块" class="headerlink" title="一、源码主要模块"></a>一、源码主要模块</h1><p>我下载的Elasticsearch的源码版本为5.6.4</p>
-<p><img src="../images/es/es整体结构.png" alt="es整体结构"></p>
+<p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/es01.png" alt="es整体结构"></p>
 <p>从上图来看：Elasticsearch主要包含以下几个模块</p>
 <p>distribution：elasticsearch的打包发行相关，将elasticsearch打成各种发行包（zip，deb，rpm，tar）的模块。具体用法如是，在相应的发行版本模块下执行publishToMavenLocal这个Task，如果执行成功的话就会在路径build/distributions下生成对应的发行包，这种打好的包就能在生产服务器上运行。如果自己修改了源码，打包时就需要用到该模块了。</p>
-<p><img src="G:\我的资料\ELK日志监控\es源码分析\distribution整体架构.png" alt=":\我的资料\ELK日志监控\es源码分析\distribution整体架构.pn"></p>
+<p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/es02-2.png" alt=":\我的资料\ELK日志监控\es源码分析\distribution整体架构.pn"></p>
 <p><img src="G:\我的资料\ELK日志监控\es源码分析\distribution整体架构-打包zip.png" alt=":\我的资料\ELK日志监控\es源码分析\distribution整体架构-打包zip.pn"></p>
-<p><img src="G:\我的资料\ELK日志监控\es源码分析\distribution整体架构-打包zip成功.png" alt=":\我的资料\ELK日志监控\es源码分析\distribution整体架构-打包zip成功.pn"></p>
+<p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/es02-3.png" alt=":\我的资料\ELK日志监控\es源码分析\distribution整体架构-打包zip成功.pn"></p>
 <p>core：核心包，elasticsearch的源码主要在这个里面，Elasticsearch索引管理、集群管理、服务发现、查询、对Lucene操作的封装等都位于该模块</p>
 <p>buildSrc：elasticsearch的构建相关的代码，gradle相关依赖配置都在改模块下</p>
-<p><img src="G:\我的资料\ELK日志监控\es源码分析\buildSrc整体架构.png" alt=":\我的资料\ELK日志监控\es源码分析\buildSrc整体架构.pn"></p>
+<p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/buildSrc%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png" alt=":\我的资料\ELK日志监控\es源码分析\buildSrc整体架构.pn"></p>
 <p>client：作为连接elasticsearch的客户端相关代码，它提供了Rest方式（基于Http）、transport （Java Netty内部的通信方式）等方式。</p>
-<p><img src="G:\我的资料\ELK日志监控\es源码分析\client整体架构.png" alt=":\我的资料\ELK日志监控\es源码分析\client整体架构.pn"></p>
+<p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/client%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84.png" alt=":\我的资料\ELK日志监控\es源码分析\client整体架构.pn"></p>
 <p>modules：作为elasticsearch除核心外的必备模块相关代码,比如对Netty的封装、父子类查询、重建索引</p>
 <p><img src="G:\我的资料\ELK日志监控\es源码分析\modules整体架构.png" alt=":\我的资料\ELK日志监控\es源码分析\modules整体架构.pn"></p>
 <p>plugins：作为elasticsearch必备的插件的相关代码，丰富ES的相关功能，比如IK分词器插件、mapper-attachments/ingest-attachment文件处理插件。</p>
@@ -332,8 +332,8 @@
     </a>
   
   
-    <a href="/2018/05/26/elasticsearch源码环境搭建/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Elasticsearch源码阅读环境搭建(一)</div>
+    <a href="/2018/05/26/elasticsearch源码分析(二)--启动/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">elasticsearch源码分析(一)--启动</div>
       <i class="icon-circle-right"></i>
     </a>
   
