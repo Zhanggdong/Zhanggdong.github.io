@@ -6,11 +6,11 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>elasticsearch源码分析(一)--启动 | Gre的博客</title>
+  <title>elasticsearch源码分析(二)--启动 | Gre的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="由于最近半年来一直在使用Elasticsearch来做全文检索和ELK统一日志工作，对于ES还是觉得需要细细研究，才能感受到它的魅力，才能有所提高。 我们先提出几个问题：  启动入口在哪个类？ 启动需要做哪些初始化工作？ 如何加载配置文件？  一、怎么找启动入口在哪个类看源码最头疼的事情就是找入口，相信很多刚开始也是这样，面对那么多模块中的类，很难找到一个切入点，我刚开始看也是这样，对于这样的问题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="elasticsearch源码分析(一)--启动">
+<meta property="og:title" content="elasticsearch源码分析(二)--启动">
 <meta property="og:url" content="http://yoursite.com/2018/05/26/elasticsearch源码分析(二)--启动/index.html">
 <meta property="og:site_name" content="Gre的博客">
 <meta property="og:description" content="由于最近半年来一直在使用Elasticsearch来做全文检索和ELK统一日志工作，对于ES还是觉得需要细细研究，才能感受到它的魅力，才能有所提高。 我们先提出几个问题：  启动入口在哪个类？ 启动需要做哪些初始化工作？ 如何加载配置文件？  一、怎么找启动入口在哪个类看源码最头疼的事情就是找入口，相信很多刚开始也是这样，面对那么多模块中的类，很难找到一个切入点，我刚开始看也是这样，对于这样的问题">
@@ -22,9 +22,9 @@
 <meta property="og:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/Node%E5%AE%9A%E4%B9%891.png">
 <meta property="og:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/Node%E5%AE%9A%E4%B9%89.png">
 <meta property="og:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/Elasticsearch%E6%BA%90%E7%A0%81%E5%90%AF%E5%8A%A8%E6%97%B6%E5%BA%8F%E5%9B%BE.png">
-<meta property="og:updated_time" content="2018-06-21T09:35:31.098Z">
+<meta property="og:updated_time" content="2018-06-21T09:37:22.865Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="elasticsearch源码分析(一)--启动">
+<meta name="twitter:title" content="elasticsearch源码分析(二)--启动">
 <meta name="twitter:description" content="由于最近半年来一直在使用Elasticsearch来做全文检索和ELK统一日志工作，对于ES还是觉得需要细细研究，才能感受到它的魅力，才能有所提高。 我们先提出几个问题：  启动入口在哪个类？ 启动需要做哪些初始化工作？ 如何加载配置文件？  一、怎么找启动入口在哪个类看源码最头疼的事情就是找入口，相信很多刚开始也是这样，面对那么多模块中的类，很难找到一个切入点，我刚开始看也是这样，对于这样的问题">
 <meta name="twitter:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/es%E5%8D%95%E6%9C%BA%E5%90%AF%E5%8A%A8.png">
   
@@ -179,7 +179,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      elasticsearch源码分析(一)--启动
+      elasticsearch源码分析(二)--启动
     </h1>
   
 
@@ -479,18 +479,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/06/19/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/05/26/elasticsearch源码分析(一)--整体架构/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Hello World
+          elasticsearch源码分析(一)--整体架构
         
       </div>
     </a>
   
   
-    <a href="/2018/05/26/elasticsearch源码分析(一)--整体架构/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">elasticsearch源码分析(一)--整体架构</div>
+    <a href="/2018/05/26/elasticsearch源码环境搭建/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Elasticsearch源码阅读环境搭建</div>
       <i class="icon-circle-right"></i>
     </a>
   
