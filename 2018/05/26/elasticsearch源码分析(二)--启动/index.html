@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/Node%E5%AE%9A%E4%B9%891.png">
 <meta property="og:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/Node%E5%AE%9A%E4%B9%89.png">
 <meta property="og:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/Elasticsearch%E6%BA%90%E7%A0%81%E5%90%AF%E5%8A%A8%E6%97%B6%E5%BA%8F%E5%9B%BE.png">
-<meta property="og:updated_time" content="2018-06-21T09:37:22.865Z">
+<meta property="og:updated_time" content="2018-06-22T01:29:18.196Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="elasticsearch源码分析(二)--启动">
 <meta name="twitter:description" content="由于最近半年来一直在使用Elasticsearch来做全文检索和ELK统一日志工作，对于ES还是觉得需要细细研究，才能感受到它的魅力，才能有所提高。 我们先提出几个问题：  启动入口在哪个类？ 启动需要做哪些初始化工作？ 如何加载配置文件？  一、怎么找启动入口在哪个类看源码最头疼的事情就是找入口，相信很多刚开始也是这样，面对那么多模块中的类，很难找到一个切入点，我刚开始看也是这样，对于这样的问题">
@@ -371,8 +371,11 @@
 <p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/Elasticsearch%E6%BA%90%E7%A0%81%E5%90%AF%E5%8A%A8%E6%97%B6%E5%BA%8F%E5%9B%BE.png" alt=":\hexo\source\images\es\Elasticsearch源码启动时序图.pn"></p>
 <p>现在还遗留着几个问题：</p>
 <ul>
+<li>master选举是在什么模块进行的</li>
+</ul>
+<ul>
 <li>怎么进行master选举</li>
-<li>怎么进行节点监控</li>
+<li>怎么进行节点监控、维护的</li>
 </ul>
 <p>留到下一篇再进行分析。。。</p>
 
@@ -479,9 +482,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2018/05/26/elasticsearch源码分析(一)--整体架构/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          elasticsearch源码分析(一)--整体架构
+        
+      </div>
+    </a>
   
-    <a href="/2018/05/26/elasticsearch源码分析(一)--整体架构/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">elasticsearch源码分析(一)--整体架构</div>
+  
+    <a href="/2018/05/26/redis/redis/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Redis面试题整理</div>
       <i class="icon-circle-right"></i>
     </a>
   
