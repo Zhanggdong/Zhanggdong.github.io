@@ -281,7 +281,7 @@
 </table>
 <p>该<code>discovery.zen.no_master_block</code>设置不适用于基于节点的apis（例如，群集统计信息，节点信息和节点统计信息apis）。对这些apis的请求不会被阻止，并且可以在任何可用的节点上运行。</p>
 <h5 id="1-7-Fault-Delection"><a href="#1-7-Fault-Delection" class="headerlink" title="1.7 Fault Delection"></a>1.7 Fault Delection</h5><p>用ping的方式来确定node是否在集群里面</p>
-<h4 id="二、Discovery源码分析"><a href="#二、Discovery源码分析" class="headerlink" title="二、Discovery源码分析"></a>二、Discovery源码分析</h4><h5 id="2-1-Discovery类图"><a href="#2-1-Discovery类图" class="headerlink" title="2.1 Discovery类图"></a>2.1 Discovery类图</h5><p><img src="F:\hexo\source\images\es\ZenDiscovery类图.png" alt=":\hexo\source\images\es\ZenDiscovery类图.pn"></p>
+<h4 id="二、Discovery源码分析"><a href="#二、Discovery源码分析" class="headerlink" title="二、Discovery源码分析"></a>二、Discovery源码分析</h4><h5 id="2-1-Discovery类图"><a href="#2-1-Discovery类图" class="headerlink" title="2.1 Discovery类图"></a>2.1 Discovery类图</h5><p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/ZenDiscovery%E7%B1%BB%E5%9B%BE.png" alt=":\hexo\source\images\es\ZenDiscovery类图.pn"></p>
 <h5 id="2-2-与Discovery相关的几个类"><a href="#2-2-与Discovery相关的几个类" class="headerlink" title="2.2 与Discovery相关的几个类"></a>2.2 与Discovery相关的几个类</h5><p>ZenDiscovery.java 模块的主类，也是启动这个模块的入口，由Node.java调用并初始化，几乎涵盖了全部的发现协议的逻辑，是一个高度内聚了类，它有一些成员变量，需要明白他们的意思：</p>
 <ul>
 <li>pingTimeout：取自discovery.zen.ping_timeout（默认为3s）允许调整选举时间来处理网络慢或拥塞的情况（更高的值确保更少的失败机会）</li>

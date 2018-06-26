@@ -15,13 +15,13 @@
 <meta property="og:site_name" content="Gre的博客">
 <meta property="og:description" content="通过上一篇对Elasticsearch启动的分析，我们知道了ES启动的大致流程，还遗留下几个问题  master选举是在什么模块进行的 ES集群是如何进行Master选举的？ ES是如何维护这些节点的？ Discovery模块是如何运作的？  要想进行Master选举，必然要有一套算法机制，以及节点之前的通信连接、判断节点存活状态等。 通过查阅官网资料，我们知道这些功能是在Elasticsearc">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="f:/hexo/source/images/es/ZenDiscovery类图.png">
+<meta property="og:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/ZenDiscovery%E7%B1%BB%E5%9B%BE.png">
 <meta property="og:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/Discovery%E6%97%B6%E5%BA%8F%E5%9B%BE.png">
-<meta property="og:updated_time" content="2018-06-26T02:45:01.238Z">
+<meta property="og:updated_time" content="2018-06-26T02:47:56.044Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="elasticsearch源码分析(三)Discover模块">
 <meta name="twitter:description" content="通过上一篇对Elasticsearch启动的分析，我们知道了ES启动的大致流程，还遗留下几个问题  master选举是在什么模块进行的 ES集群是如何进行Master选举的？ ES是如何维护这些节点的？ Discovery模块是如何运作的？  要想进行Master选举，必然要有一套算法机制，以及节点之前的通信连接、判断节点存活状态等。 通过查阅官网资料，我们知道这些功能是在Elasticsearc">
-<meta name="twitter:image" content="f:/hexo/source/images/es/ZenDiscovery类图.png">
+<meta name="twitter:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/ZenDiscovery%E7%B1%BB%E5%9B%BE.png">
   
     <link rel="alternative" href="/atom.xml" title="Gre的博客" type="application/atom+xml">
   
@@ -286,7 +286,7 @@
 </table>
 <p>该<code>discovery.zen.no_master_block</code>设置不适用于基于节点的apis（例如，群集统计信息，节点信息和节点统计信息apis）。对这些apis的请求不会被阻止，并且可以在任何可用的节点上运行。</p>
 <h5 id="1-7-Fault-Delection"><a href="#1-7-Fault-Delection" class="headerlink" title="1.7 Fault Delection"></a>1.7 Fault Delection</h5><p>用ping的方式来确定node是否在集群里面</p>
-<h4 id="二、Discovery源码分析"><a href="#二、Discovery源码分析" class="headerlink" title="二、Discovery源码分析"></a>二、Discovery源码分析</h4><h5 id="2-1-Discovery类图"><a href="#2-1-Discovery类图" class="headerlink" title="2.1 Discovery类图"></a>2.1 Discovery类图</h5><p><img src="F:\hexo\source\images\es\ZenDiscovery类图.png" alt=":\hexo\source\images\es\ZenDiscovery类图.pn"></p>
+<h4 id="二、Discovery源码分析"><a href="#二、Discovery源码分析" class="headerlink" title="二、Discovery源码分析"></a>二、Discovery源码分析</h4><h5 id="2-1-Discovery类图"><a href="#2-1-Discovery类图" class="headerlink" title="2.1 Discovery类图"></a>2.1 Discovery类图</h5><p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/ZenDiscovery%E7%B1%BB%E5%9B%BE.png" alt=":\hexo\source\images\es\ZenDiscovery类图.pn"></p>
 <h5 id="2-2-与Discovery相关的几个类"><a href="#2-2-与Discovery相关的几个类" class="headerlink" title="2.2 与Discovery相关的几个类"></a>2.2 与Discovery相关的几个类</h5><p>ZenDiscovery.java 模块的主类，也是启动这个模块的入口，由Node.java调用并初始化，几乎涵盖了全部的发现协议的逻辑，是一个高度内聚了类，它有一些成员变量，需要明白他们的意思：</p>
 <ul>
 <li>pingTimeout：取自discovery.zen.ping_timeout（默认为3s）允许调整选举时间来处理网络慢或拥塞的情况（更高的值确保更少的失败机会）</li>
