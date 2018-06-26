@@ -162,19 +162,104 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-elasticsearch源码分析(三)--Discover模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Elasticsearch/elasticsearch源码分析(四)--transport模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/27/elasticsearch源码分析(三)--Discover模块/">elasticsearch源码分析(三)Discover模块</a>
+      <a class="article-title" href="/2018/05/30/Elasticsearch/elasticsearch源码分析(四)--transport模块/">elasticsearch源码分析(四)--transport模块</a>
     </h1>
   
 
         
-        <a href="/2018/05/27/elasticsearch源码分析(三)--Discover模块/" class="archive-article-date">
+        <a href="/2018/05/30/Elasticsearch/elasticsearch源码分析(四)--transport模块/" class="archive-article-date">
+  	<time datetime="2018-05-30T02:12:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>通过上一篇对Elasticsearch Discovery的分析，我们知道了ES Discovery的主要是用来做发现协议的，它包含了master选举、集群状态更新等功能，而在这一过程当中也依赖了Transport模块，但是我们一直没有谈论，本篇着重来分析Transport模块是做什么的，我们先来提出几个问题？</p>
+<ul>
+<li>Transport模块是用来干什么的？</li>
+<li>ES有哪两种Client？</li>
+<li>ES有哪两种Client是如何与Nodes通信工作的？</li>
+<li>Transport的工作原理？</li>
+</ul>
+<h3 id="一、Transport模块介绍"><a href="#一、Transport模块介绍" class="headerlink" title="一、Transport模块介绍"></a>一、Transport模块介绍</h3><p>transport模块是es通信的基础模块，在elasticsearch中用的很广泛，比如集群node之间的通信、数据的传输、transport client方式的数据发送等等,只要数和通信、数据传输相关的都离不开transport模块的作用。</p>
+<p>先来看官网初始化Client例子：<a href="https://www.elastic.co/guide/en/elasticsearch/client/java-api/5.5/transport-client.html" target="_blank" rel="noopener">TransportClient</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TransportClient client = <span class="keyword">new</span> PreBuiltTransportClient(Settings.EMPTY)</span><br><span class="line">        .addTransportAddress(<span class="keyword">new</span> InetSocketTransportAddress(InetAddress.getByName(<span class="string">"host1"</span>), <span class="number">9300</span>))</span><br><span class="line">        .addTransportAddress(<span class="keyword">new</span> InetSocketTransportAddress(InetAddress.getByName(<span class="string">"host2"</span>), <span class="number">9300</span>));</span><br><span class="line"></span><br><span class="line">Settings settings = Settings.builder()</span><br><span class="line">        .put(<span class="string">"cluster.name"</span>, <span class="string">"myClusterName"</span>).build();</span><br><span class="line">TransportClient client = <span class="keyword">new</span> PreBuiltTransportClient(settings);</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/client/java-rest/5.5/_initialization.html" target="_blank" rel="noopener">RestClient</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RestClient restClient = RestClient.builder(</span><br><span class="line">        <span class="keyword">new</span> HttpHost(<span class="string">"localhost"</span>, <span class="number">9200</span>, <span class="string">"http"</span>),</span><br><span class="line">        <span class="keyword">new</span> HttpHost(<span class="string">"localhost"</span>, <span class="number">9201</span>, <span class="string">"http"</span>)).build();</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Elasticsearch源码分析专题//" class="article-tag-list-link color5">Elasticsearch源码分析专题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/30/Elasticsearch/elasticsearch源码分析(四)--transport模块/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Elasticsearch/elasticsearch源码分析(三)--Discover模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/27/Elasticsearch/elasticsearch源码分析(三)--Discover模块/">elasticsearch源码分析(三)Discover模块</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/27/Elasticsearch/elasticsearch源码分析(三)--Discover模块/" class="archive-article-date">
   	<time datetime="2018-05-27T04:12:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-27</time>
 </a>
         
@@ -434,7 +519,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/27/elasticsearch源码分析(三)--Discover模块/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/27/Elasticsearch/elasticsearch源码分析(三)--Discover模块/">展开全文 >></a>
         </p>
       
 
@@ -556,19 +641,19 @@
 
 
   
-    <article id="post-elasticsearch源码分析(二)--启动" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Elasticsearch/elasticsearch源码分析(二)--启动" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/25/elasticsearch源码分析(二)--启动/">elasticsearch源码分析(二)--启动</a>
+      <a class="article-title" href="/2018/05/25/Elasticsearch/elasticsearch源码分析(二)--启动/">elasticsearch源码分析(二)--启动</a>
     </h1>
   
 
         
-        <a href="/2018/05/25/elasticsearch源码分析(二)--启动/" class="archive-article-date">
+        <a href="/2018/05/25/Elasticsearch/elasticsearch源码分析(二)--启动/" class="archive-article-date">
   	<time datetime="2018-05-25T04:10:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-25</time>
 </a>
         
@@ -717,6 +802,8 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPool</span><span class="params">(<span class="keyword">final</span> Settings settings, <span class="keyword">final</span> ExecutorBuilder&lt;?&gt;... customBuilders)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(settings);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">assert</span> Node.NODE_NAME_SETTING.exists(settings);</span><br><span class="line">        <span class="comment">// 将构造好的线程池添加到HashMap中，key是线程池的名称，value是ExecutorBuilder</span></span><br><span class="line">        <span class="comment">// 每一个线程都是通过ExecutorBuilder来构造</span></span><br><span class="line">        <span class="keyword">final</span> Map&lt;String, ExecutorBuilder&gt; builders = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> availableProcessors = EsExecutors.boundedNumberOfProcessors(settings);</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> halfProcMaxAt5 = halfNumberOfProcessorsMaxFive(availableProcessors);</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> halfProcMaxAt10 = halfNumberOfProcessorsMaxTen(availableProcessors);</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> genericThreadPoolMax = boundedBy(<span class="number">4</span> * availableProcessors, <span class="number">128</span>, <span class="number">512</span>);</span><br><span class="line">        builders.put(Names.GENERIC, <span class="keyword">new</span> ScalingExecutorBuilder(Names.GENERIC, <span class="number">4</span>, genericThreadPoolMax, TimeValue.timeValueSeconds(<span class="number">30</span>)));</span><br><span class="line">        builders.put(Names.INDEX, <span class="keyword">new</span> FixedExecutorBuilder(settings, Names.INDEX, availableProcessors, <span class="number">200</span>));</span><br><span class="line">        builders.put(Names.BULK, <span class="keyword">new</span> FixedExecutorBuilder(settings, Names.BULK, availableProcessors, <span class="number">200</span>)); <span class="comment">// now that we reuse bulk for index/delete ops</span></span><br><span class="line">        builders.put(Names.GET, <span class="keyword">new</span> FixedExecutorBuilder(settings, Names.GET, availableProcessors, <span class="number">1000</span>));</span><br><span class="line">        builders.put(Names.SEARCH, <span class="keyword">new</span> FixedExecutorBuilder(settings, Names.SEARCH, searchThreadPoolSize(availableProcessors), <span class="number">1000</span>));</span><br><span class="line">        builders.put(Names.MANAGEMENT, <span class="keyword">new</span> ScalingExecutorBuilder(Names.MANAGEMENT, <span class="number">1</span>, <span class="number">5</span>, TimeValue.timeValueMinutes(<span class="number">5</span>)));</span><br><span class="line">        <span class="comment">// no queue as this means clients will need to handle rejections on listener queue even if the operation succeeded</span></span><br><span class="line">        <span class="comment">// the assumption here is that the listeners should be very lightweight on the listeners side</span></span><br><span class="line">        builders.put(Names.LISTENER, <span class="keyword">new</span> FixedExecutorBuilder(settings, Names.LISTENER, halfProcMaxAt10, -<span class="number">1</span>));</span><br><span class="line">        builders.put(Names.FLUSH, <span class="keyword">new</span> ScalingExecutorBuilder(Names.FLUSH, <span class="number">1</span>, halfProcMaxAt5, TimeValue.timeValueMinutes(<span class="number">5</span>)));</span><br><span class="line">        builders.put(Names.REFRESH, <span class="keyword">new</span> ScalingExecutorBuilder(Names.REFRESH, <span class="number">1</span>, halfProcMaxAt10, TimeValue.timeValueMinutes(<span class="number">5</span>)));</span><br><span class="line">        builders.put(Names.WARMER, <span class="keyword">new</span> ScalingExecutorBuilder(Names.WARMER, <span class="number">1</span>, halfProcMaxAt5, TimeValue.timeValueMinutes(<span class="number">5</span>)));</span><br><span class="line">        builders.put(Names.SNAPSHOT, <span class="keyword">new</span> ScalingExecutorBuilder(Names.SNAPSHOT, <span class="number">1</span>, halfProcMaxAt5, TimeValue.timeValueMinutes(<span class="number">5</span>)));</span><br><span class="line">        builders.put(Names.FETCH_SHARD_STARTED, <span class="keyword">new</span> ScalingExecutorBuilder(Names.FETCH_SHARD_STARTED, <span class="number">1</span>, <span class="number">2</span> * availableProcessors, TimeValue.timeValueMinutes(<span class="number">5</span>)));</span><br><span class="line">        builders.put(Names.FORCE_MERGE, <span class="keyword">new</span> FixedExecutorBuilder(settings, Names.FORCE_MERGE, <span class="number">1</span>, -<span class="number">1</span>));</span><br><span class="line">        builders.put(Names.FETCH_SHARD_STORE, <span class="keyword">new</span> ScalingExecutorBuilder(Names.FETCH_SHARD_STORE, <span class="number">1</span>, <span class="number">2</span> * availableProcessors, TimeValue.timeValueMinutes(<span class="number">5</span>)));</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">final</span> ExecutorBuilder&lt;?&gt; builder : customBuilders) &#123;</span><br><span class="line">            <span class="keyword">if</span> (builders.containsKey(builder.name())) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"builder with name ["</span> + builder.name() + <span class="string">"] already exists"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            builders.put(builder.name(), builder);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.builders = Collections.unmodifiableMap(builders);</span><br><span class="line"></span><br><span class="line">        threadContext = <span class="keyword">new</span> ThreadContext(settings);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> Map&lt;String, ExecutorHolder&gt; executors = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>) <span class="keyword">final</span> Map.Entry&lt;String, ExecutorBuilder&gt; entry : builders.entrySet()) &#123;</span><br><span class="line">            <span class="keyword">final</span> ExecutorBuilder.ExecutorSettings executorSettings = entry.getValue().getSettings(settings);</span><br><span class="line">            <span class="keyword">final</span> ExecutorHolder executorHolder = entry.getValue().build(executorSettings, threadContext);</span><br><span class="line">            <span class="keyword">if</span> (executors.containsKey(executorHolder.info.getName())) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"duplicate executors with name ["</span> + executorHolder.info.getName() + <span class="string">"] registered"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            logger.debug(<span class="string">"created thread pool: &#123;&#125;"</span>, entry.getValue().formatInfo(executorHolder.info));</span><br><span class="line">            executors.put(entry.getKey(), executorHolder);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        executors.put(Names.SAME, <span class="keyword">new</span> ExecutorHolder(DIRECT_EXECUTOR, <span class="keyword">new</span> Info(Names.SAME, ThreadPoolType.DIRECT)));</span><br><span class="line">        <span class="keyword">this</span>.executors = unmodifiableMap(executors);</span><br><span class="line">        <span class="comment">// 最后创建一个1线程的scheduler来执行定时任务</span></span><br><span class="line">        <span class="keyword">this</span>.scheduler = <span class="keyword">new</span> ScheduledThreadPoolExecutor(<span class="number">1</span>, EsExecutors.daemonThreadFactory(settings, <span class="string">"scheduler"</span>), <span class="keyword">new</span> EsAbortPolicy());</span><br><span class="line">        <span class="keyword">this</span>.scheduler.setExecuteExistingDelayedTasksAfterShutdownPolicy(<span class="keyword">false</span>);</span><br><span class="line">        <span class="keyword">this</span>.scheduler.setContinueExistingPeriodicTasksAfterShutdownPolicy(<span class="keyword">false</span>);</span><br><span class="line">        <span class="keyword">this</span>.scheduler.setRemoveOnCancelPolicy(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">        TimeValue estimatedTimeInterval = ESTIMATED_TIME_INTERVAL_SETTING.get(settings);</span><br><span class="line">        <span class="comment">// 最后创建一个执行timer的线程</span></span><br><span class="line">        <span class="keyword">this</span>.cachedTimeThread = <span class="keyword">new</span> CachedTimeThread(EsExecutors.threadName(settings, <span class="string">"[timer]"</span>), estimatedTimeInterval.millis());</span><br><span class="line">        <span class="keyword">this</span>.cachedTimeThread.start();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>原来在ES的threadPool中，根据不同的类型分别分配了不同线程数的一个线程池，而executor由一个executorBuilder来提供，所以submit task的时候也需要指定不同的Name。最后创建一个1线程的scheduler来执行定时任务。最后创建一个执行timer的线程。</p>
 <p>再继续往下看Node的构造方法就会看到接下来会new 一堆的services和modules，这里就不一一过了，其共性就是都会绑定刚刚创建的threadPool，已经也会绑定必要的services，某些module本身具有后台线程的话，初始化完成需要调用<code>.start()</code>去启动这些后台线程。</p>
+<p>问题：</p>
+<p>32和Runtime.getRuntime().availableProcessors()中的最小值，也就是不能超过32，为什么会有这个限制呢？是因为在elasticsearch的github上有人提了个<a href="https://github.com/elastic/elasticsearch/issues/3478" target="_blank" rel="noopener">issues/3478</a>，当使用core很多的机器的时候（比如48core），会创建太多的内存从而导致OOM，所以设置了32的上限来避免太多线程给系统产生压力。</p>
 <ul>
 <li>初始化modules实例，通过Guice的Injector进行注入各个Module实例</li>
 </ul>
@@ -785,7 +872,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/25/elasticsearch源码分析(二)--启动/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/25/Elasticsearch/elasticsearch源码分析(二)--启动/">展开全文 >></a>
         </p>
       
 
@@ -815,19 +902,19 @@
 
 
   
-    <article id="post-elasticsearch源码分析(一)--整体架构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Elasticsearch/elasticsearch源码分析(一)--整体架构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/24/elasticsearch源码分析(一)--整体架构/">elasticsearch源码分析(一)--整体架构</a>
+      <a class="article-title" href="/2018/05/24/Elasticsearch/elasticsearch源码分析(一)--整体架构/">elasticsearch源码分析(一)--整体架构</a>
     </h1>
   
 
         
-        <a href="/2018/05/24/elasticsearch源码分析(一)--整体架构/" class="archive-article-date">
+        <a href="/2018/05/24/Elasticsearch/elasticsearch源码分析(一)--整体架构/" class="archive-article-date">
   	<time datetime="2018-05-24T02:12:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-24</time>
 </a>
         
@@ -882,7 +969,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/24/elasticsearch源码分析(一)--整体架构/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/24/Elasticsearch/elasticsearch源码分析(一)--整体架构/">展开全文 >></a>
         </p>
       
 
@@ -912,19 +999,19 @@
 
 
   
-    <article id="post-elasticsearch源码环境搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Elasticsearch/elasticsearch源码环境搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/23/elasticsearch源码环境搭建/">Elasticsearch源码阅读环境搭建</a>
+      <a class="article-title" href="/2018/05/23/Elasticsearch/elasticsearch源码环境搭建/">Elasticsearch源码阅读环境搭建</a>
     </h1>
   
 
         
-        <a href="/2018/05/23/elasticsearch源码环境搭建/" class="archive-article-date">
+        <a href="/2018/05/23/Elasticsearch/elasticsearch源码环境搭建/" class="archive-article-date">
   	<time datetime="2018-05-23T04:12:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-23</time>
 </a>
         
@@ -955,7 +1042,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/23/elasticsearch源码环境搭建/">展开全文 >></a>
+          <a class="article-more-a" href="/2018/05/23/Elasticsearch/elasticsearch源码环境搭建/">展开全文 >></a>
         </p>
       
 

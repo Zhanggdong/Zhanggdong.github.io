@@ -11,13 +11,13 @@
   <meta name="description" content="通过上一篇对Elasticsearch启动的分析，我们知道了ES启动的大致流程，还遗留下几个问题  master选举是在什么模块进行的 ES集群是如何进行Master选举的？ ES是如何维护这些节点的？ Discovery模块是如何运作的？  要想进行Master选举，必然要有一套算法机制，以及节点之前的通信连接、判断节点存活状态等。 通过查阅官网资料，我们知道这些功能是在Elasticsearc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="elasticsearch源码分析(三)Discover模块">
-<meta property="og:url" content="http://yoursite.com/2018/05/27/elasticsearch源码分析(三)--Discover模块/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/05/27/Elasticsearch/elasticsearch源码分析(三)--Discover模块/index.html">
 <meta property="og:site_name" content="Gre的博客">
 <meta property="og:description" content="通过上一篇对Elasticsearch启动的分析，我们知道了ES启动的大致流程，还遗留下几个问题  master选举是在什么模块进行的 ES集群是如何进行Master选举的？ ES是如何维护这些节点的？ Discovery模块是如何运作的？  要想进行Master选举，必然要有一套算法机制，以及节点之前的通信连接、判断节点存活状态等。 通过查阅官网资料，我们知道这些功能是在Elasticsearc">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/ZenDiscovery%E7%B1%BB%E5%9B%BE.png">
 <meta property="og:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/Discovery%E6%97%B6%E5%BA%8F%E5%9B%BE.png">
-<meta property="og:updated_time" content="2018-06-26T02:47:56.044Z">
+<meta property="og:updated_time" content="2018-06-26T02:50:51.038Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="elasticsearch源码分析(三)Discover模块">
 <meta name="twitter:description" content="通过上一篇对Elasticsearch启动的分析，我们知道了ES启动的大致流程，还遗留下几个问题  master选举是在什么模块进行的 ES集群是如何进行Master选举的？ ES是如何维护这些节点的？ Discovery模块是如何运作的？  要想进行Master选举，必然要有一套算法机制，以及节点之前的通信连接、判断节点存活状态等。 通过查阅官网资料，我们知道这些功能是在Elasticsearc">
@@ -167,7 +167,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-elasticsearch源码分析(三)--Discover模块" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Elasticsearch/elasticsearch源码分析(三)--Discover模块" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -179,7 +179,7 @@
   
 
         
-        <a href="/2018/05/27/elasticsearch源码分析(三)--Discover模块/" class="archive-article-date">
+        <a href="/2018/05/27/Elasticsearch/elasticsearch源码分析(三)--Discover模块/" class="archive-article-date">
   	<time datetime="2018-05-27T04:12:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-27</time>
 </a>
         
@@ -506,7 +506,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/05/27/elasticsearch源码分析(三)--Discover模块/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/05/27/Elasticsearch/elasticsearch源码分析(三)--Discover模块/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -519,6 +519,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2018/05/30/Elasticsearch/elasticsearch源码分析(四)--transport模块/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          elasticsearch源码分析(四)--transport模块
+        
+      </div>
+    </a>
   
   
     <a href="/2018/05/26/redis/redis/" id="article-nav-older" class="article-nav-link-wrap">
