@@ -16,8 +16,8 @@
 <meta property="og:description" content="通过上一篇对Elasticsearch启动的分析，我们知道了ES启动的大致流程，还遗留下几个问题  master选举是在什么模块进行的 ES集群是如何进行Master选举的？ ES是如何维护这些节点的？ Discovery模块是如何运作的？  要想进行Master选举，必然要有一套算法机制，以及节点之前的通信连接、判断节点存活状态等。 通过查阅官网资料，我们知道这些功能是在Elasticsearc">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="f:/hexo/source/images/es/ZenDiscovery类图.png">
-<meta property="og:image" content="f:/hexo/source/images/es/Discovery时序图.png">
-<meta property="og:updated_time" content="2018-06-26T02:41:18.143Z">
+<meta property="og:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/Discovery%E6%97%B6%E5%BA%8F%E5%9B%BE.png">
+<meta property="og:updated_time" content="2018-06-26T02:45:01.238Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="elasticsearch源码分析(三)Discover模块">
 <meta name="twitter:description" content="通过上一篇对Elasticsearch启动的分析，我们知道了ES启动的大致流程，还遗留下几个问题  master选举是在什么模块进行的 ES集群是如何进行Master选举的？ ES是如何维护这些节点的？ Discovery模块是如何运作的？  要想进行Master选举，必然要有一套算法机制，以及节点之前的通信连接、判断节点存活状态等。 通过查阅官网资料，我们知道这些功能是在Elasticsearc">
@@ -415,7 +415,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">transportService.registerRequestHandler(SEND_ACTION_NAME, BytesTransportRequest::<span class="keyword">new</span>, ThreadPool.Names.SAME, <span class="keyword">false</span>, <span class="keyword">false</span>,</span><br><span class="line">          <span class="keyword">new</span> SendClusterStateRequestHandler());</span><br><span class="line">      transportService.registerRequestHandler(COMMIT_ACTION_NAME, CommitClusterStateRequest::<span class="keyword">new</span>, ThreadPool.Names.SAME, <span class="keyword">false</span>, <span class="keyword">false</span>,</span><br><span class="line">          <span class="keyword">new</span> CommitClusterStateRequestHandler());</span><br></pre></td></tr></table></figure>
 <p>都会调用底层transportService来真正发送状态。</p>
 <h4 id="五、Discovery模块总结"><a href="#五、Discovery模块总结" class="headerlink" title="五、Discovery模块总结"></a>五、Discovery模块总结</h4><p>从上面的源码分析我们知道，Discovery模块是ES的核心模块，它对ES集群进行master选举、状态发布和更新。</p>
-<p><img src="F:\hexo\source\images\es\Discovery时序图.png" alt=":\hexo\source\images\es\Discovery时序图.pn"></p>
+<p><img src="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/Discovery%E6%97%B6%E5%BA%8F%E5%9B%BE.png" alt=":\hexo\source\images\es\Discovery时序图.pn"></p>
 
       
 
