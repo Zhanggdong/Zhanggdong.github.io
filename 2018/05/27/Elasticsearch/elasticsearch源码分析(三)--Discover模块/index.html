@@ -9,6 +9,7 @@
   <title>elasticsearch源码分析(三)Discover模块 | Gre的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="通过上一篇对Elasticsearch启动的分析，我们知道了ES启动的大致流程，还遗留下几个问题  master选举是在什么模块进行的 ES集群是如何进行Master选举的？ ES是如何维护这些节点的？ Discovery模块是如何运作的？  要想进行Master选举，必然要有一套算法机制，以及节点之前的通信连接、判断节点存活状态等。 通过查阅官网资料，我们知道这些功能是在Elasticsearc">
+<meta name="keywords" content="elasticsearch,源码分析">
 <meta property="og:type" content="article">
 <meta property="og:title" content="elasticsearch源码分析(三)Discover模块">
 <meta property="og:url" content="http://yoursite.com/2018/05/27/Elasticsearch/elasticsearch源码分析(三)--Discover模块/index.html">
@@ -17,7 +18,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/ZenDiscovery%E7%B1%BB%E5%9B%BE.png">
 <meta property="og:image" content="https://github.com/Zhanggdong/Zhanggdong.github.io/raw/master/images/es/Discovery%E6%97%B6%E5%BA%8F%E5%9B%BE.png">
-<meta property="og:updated_time" content="2018-06-26T02:50:51.038Z">
+<meta property="og:updated_time" content="2018-07-02T02:01:15.526Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="elasticsearch源码分析(三)Discover模块">
 <meta name="twitter:description" content="通过上一篇对Elasticsearch启动的分析，我们知道了ES启动的大致流程，还遗留下几个问题  master选举是在什么模块进行的 ES集群是如何进行Master选举的？ ES是如何维护这些节点的？ Discovery模块是如何运作的？  要想进行Master选举，必然要有一套算法机制，以及节点之前的通信连接、判断节点存活状态等。 通过查阅官网资料，我们知道这些功能是在Elasticsearc">
@@ -337,6 +338,9 @@
 <li>什么时候触发选举？</li>
 <li>为什么不用ZK来实现master选举？</li>
 <li>如何获取到最新的状态数据？</li>
+<li>Master如何进行故障检测？</li>
+<li>Master如何管理集群</li>
+<li>ClusterState的更新流程</li>
 </ul>
 <h5 id="3-1-分布式系统设计思想"><a href="#3-1-分布式系统设计思想" class="headerlink" title="3.1 分布式系统设计思想"></a>3.1 分布式系统设计思想</h5><p>所有的分布式系统都会遇到各个节点数据同步问题（一致性）、因网络故障存在的延迟、脑裂等问题都需要用一套合理的解决方案。比如，在互联网中比较经典的CAP理论和BASE理论。在ES中同样需要面临这样的问题？</p>
 <h5 id="3-2-ES为什么要master选举"><a href="#3-2-ES为什么要master选举" class="headerlink" title="3.2 ES为什么要master选举"></a>3.2 ES为什么要master选举</h5><p>一种选择是分布式哈希表(DHT),可以支持每小时数千个节点的离开和加入,他可以在不了解底层网络拓扑的异构网络中工作,查询响应时间大约为4到10跳(中转次数)，但是在相对稳定的对等网络中,Master模式会更好</p>
@@ -445,6 +449,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">elasticsearch</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码分析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
@@ -655,6 +674,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">elasticsearch</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">源码分析</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
